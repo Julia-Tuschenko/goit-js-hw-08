@@ -1,3 +1,5 @@
+import  throttle from "lodash.throttle";
+
 const LOCALSTORANGE_KEY = 'selectedFiltres';
 const feedbackForm = document.querySelector('.feedback-form');
 
@@ -9,17 +11,19 @@ feedbackForm.addEventListener('imput', evt => {
     formData.forEach((value, name) => console.log(value, name));
 });
 
-feedbackForm.addEventListener('change', evt => {
-    let persistedFilters = localStorage.getItem(LOCALSTORANGE_KEY);
-    persistedFilters = persistedFilters ? JSON.parse(persistedFilters) : {};
-    persistedFilters[evt.target.name] =evt.target.value;
-    localStorage.setItem(LOCALSTORANGE_KEY, JSON.stringify(persistedFilters));
-});
+feedbackForm.addEventListener('change', throttle(onThottle, 500));
 
 feedbackForm.addEventListener('submit', evt => {
     localStorage.removeItem(LOCALSTORANGE_KEY);
 }
 );
+
+function onThottle (evt){
+    let persistedFilters = localStorage.getItem(LOCALSTORANGE_KEY);
+    persistedFilters = persistedFilters ? JSON.parse(persistedFilters) : {};
+    persistedFilters[evt.target.name] =evt.target.value;
+    localStorage.setItem(LOCALSTORANGE_KEY, JSON.stringify(persistedFilters));
+}
 
 function initForm(){
 let persistedFilters = localStorage.getItem(LOCALSTORANGE_KEY);
