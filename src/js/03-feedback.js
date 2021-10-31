@@ -1,6 +1,6 @@
 import  throttle from "lodash.throttle";
 
-const LOCALSTORANGE_KEY = 'selectedFiltres';
+const LOCALSTORANGE_KEY = 'feedback-form-state';
 const feedbackForm = document.querySelector('.feedback-form');
 
 initForm();
