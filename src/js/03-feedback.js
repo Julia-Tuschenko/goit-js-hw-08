@@ -5,7 +5,7 @@ const feedbackForm = document.querySelector('.feedback-form');
 
 initForm();
 
-feedbackForm.addEventListener('imput', evt => {
+feedbackForm.addEventListener('input', evt => {
     evt.preventDefault();
     const formData = new FormData(feedbackForm);
     formData.forEach((value, name) => console.log(value, name));

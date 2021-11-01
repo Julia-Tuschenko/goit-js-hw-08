@@ -22,19 +22,38 @@ function onPlay(data) {
 player.on('timeupdate', throttle(onPlay, 1000));
 console.log(onPlay);
 
-
-function getTime() {
-    const saveTime = localStorage.getItem(LOCALPLAYER_KEY);
-
-    player
-      .setCurrentTime(saveTime)
-      .then()
-      .catch(function (error) {
-        return error.name;
-      });
+const saveTime = localStorage.getItem(LOCALPLAYER_KEY);
+  if(saveTime){
+    player.setCurrentTime(saveTime);
   }
 
-  player.on('play', throttle(getTime, 1000));
+player.on('play', throttle(saveTime, 1000));
+
+
+// function getTime() {
+//     const saveTime = localStorage.getItem(LOCALPLAYER_KEY);
+//     if(saveTime){
+//       player.setCurrentTime(saveTime);
+//     }
+//   }
+//   player.on('play', throttle(getTime, 1000));
+
+
+
+// function getTime() {
+//     const saveTime = localStorage.getItem(LOCALPLAYER_KEY);
+
+//     player
+//       .setCurrentTime(saveTime)
+//       .then()
+//       .catch(function (error) {
+//         return error.name;
+//       });
+//   }
+
+//   player.on('play', throttle(getTime, 1000));
+
+
 // player.on('play', function() {
 //     console.log('played the video!');
 // });
